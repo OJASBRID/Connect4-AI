@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Place : MonoBehaviour
 {
-    public int[][] matrix;
+    public int[,] matrix = new int [6, 7];
     int var1;
     int var2;
     int var3;
@@ -27,7 +28,7 @@ public class Place : MonoBehaviour
 
             for (int j = 0; j < 7; j++)
             {
-                matrix[i][j] = 0;
+                matrix[i,j] = 0;
             }
         }
 
@@ -43,7 +44,7 @@ public class Place : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0) && sum <42) 
         {
-           // Debug.Log("Yes");
+          
             if (gaObject.transform.name == "Square (5)" && var1 < 6)
             {
                 
@@ -51,12 +52,23 @@ public class Place : MonoBehaviour
                 if (sum % 2 == 0)
                 {
                     Instantiate(g1, new Vector3(-6, pos1, 0f), Quaternion.identity);
+                    matrix[5 - var1,0] = 1;
+                    if(wincheck())
+                    {
+                        SceneManager.LoadScene("Win");
+                    }
                     
                 }
                 else
                 {
                     Instantiate(g2, new Vector3(-6, pos1, 0f), Quaternion.identity);
+                    matrix[5 - var1,0] = 2;
+                    if (wincheck())
+                    {
+                        SceneManager.LoadScene("Lose");
+                    }
                 }
+               
                 var1++;
                 
             }
@@ -68,10 +80,20 @@ public class Place : MonoBehaviour
                 if (sum % 2 == 0)
                 {
                     Instantiate(g1, new Vector3(-4, pos1, 0f), Quaternion.identity);
+                    matrix[5 - var2,1] = 1;
+                    if (wincheck())
+                    {
+                        SceneManager.LoadScene("Win");
+                    }
                 }
                 else
                 {
                     Instantiate(g2, new Vector3(-4, pos1, 0f), Quaternion.identity);
+                    matrix[5 - var2,1] = 2;
+                    if (wincheck())
+                    {
+                        SceneManager.LoadScene("Lose");
+                    }
                 }
                 var2++;
 
@@ -81,10 +103,23 @@ public class Place : MonoBehaviour
             {
                 float pos1 = (float)(-3.2 + 9 * (float)var3 / 7);
                 if (sum % 2 == 0)
-                { Instantiate(g1, new Vector3(-2, pos1, 0f), Quaternion.identity); }
+                { 
+                    Instantiate(g1, new Vector3(-2, pos1, 0f), Quaternion.identity);
+                    matrix[5 - var3, 2] = 1;
+                    if (wincheck())
+                    {
+                        SceneManager.LoadScene("Win");
+                    }
+
+                }
                 else
                 {
                     Instantiate(g2, new Vector3(-2, pos1, 0f), Quaternion.identity);
+                    matrix[5 - var3,2] = 2;
+                    if (wincheck())
+                    {
+                        SceneManager.LoadScene("Lose");
+                    }
                 }
                 var3++;
 
@@ -95,10 +130,22 @@ public class Place : MonoBehaviour
                 
                 float pos1 = (float)(-3.2 + 9 * (float)var4 / 7);
                 if (sum % 2 == 0)
-                { Instantiate(g1, new Vector3(0, pos1, 0f), Quaternion.identity); }
+                { 
+                    Instantiate(g1, new Vector3(0, pos1, 0f), Quaternion.identity);
+                    matrix[5 - var4,3] = 1;
+                    if (wincheck())
+                    {
+                        SceneManager.LoadScene("Win");
+                    }
+                }
                 else
                 {
                     Instantiate(g2, new Vector3(0, pos1, 0f), Quaternion.identity);
+                    matrix[5 - var4, 3] = 2;
+                    if (wincheck())
+                    {
+                        SceneManager.LoadScene("Lose");
+                    }
                 }
                 var4++;
 
@@ -108,10 +155,22 @@ public class Place : MonoBehaviour
             {
                 float pos1 = (float)(-3.2 + 9 * (float)var5 / 7);
                 if (sum % 2 == 0)
-                { Instantiate(g1, new Vector3(2, pos1, 0f), Quaternion.identity); }
+                { 
+                    Instantiate(g1, new Vector3(2, pos1, 0f), Quaternion.identity);
+                    matrix[5 - var5, 4] = 1;
+                    if (wincheck())
+                    {
+                        SceneManager.LoadScene("Win");
+                    }
+                }
                 else
                 {
                     Instantiate(g2, new Vector3(2, pos1, 0f), Quaternion.identity);
+                    matrix[5 - var5, 4] = 2;
+                    if (wincheck())
+                    {
+                        SceneManager.LoadScene("Lose");
+                    }
                 }
                 var5++;
 
@@ -121,10 +180,22 @@ public class Place : MonoBehaviour
             {
                 float pos1 = (float)(-3.2 + 9 * (float)var6 / 7);
                 if (sum % 2 == 0)
-                { Instantiate(g1, new Vector3(4, pos1, 0f), Quaternion.identity); }
+                { 
+                    Instantiate(g1, new Vector3(4, pos1, 0f), Quaternion.identity);
+                    matrix[5 - var6, 5] = 1;
+                    if (wincheck())
+                    {
+                        SceneManager.LoadScene("Win");
+                    }
+                }
                 else
                 {
                     Instantiate(g2, new Vector3(4, pos1, 0f), Quaternion.identity);
+                    matrix[5 - var6, 5] = 2;
+                    if (wincheck())
+                    {
+                        SceneManager.LoadScene("Lose");
+                    }
                 }
                 var6++;
 
@@ -134,15 +205,32 @@ public class Place : MonoBehaviour
             {
                 float pos1 = (float)(-3.2 + 9 * (float)var7 / 7);
                 if (sum % 2 == 0)
-                { Instantiate(g1, new Vector3(6, pos1, 0f), Quaternion.identity); }
+                {
+                    Instantiate(g1, new Vector3(6, pos1, 0f), Quaternion.identity);
+                    matrix[5- var7,6] = 1;
+                    if (wincheck())
+                    {
+                        SceneManager.LoadScene("Win");
+                    }
+                }
                     else
                 {
                     Instantiate(g2, new Vector3(6, pos1, 0f), Quaternion.identity);
+                    matrix[5 - var7,6] = 2;
+                    if (wincheck())
+                    {
+                        SceneManager.LoadScene("Lose");
+                    }
                 }
                 var7++;
 
             }
         }
+        if(sum ==42)
+        {
+            SceneManager.LoadScene("Draw");
+        }
+
     }
 
     
@@ -161,7 +249,56 @@ public class Place : MonoBehaviour
         else return null;
     }
 
-   
+   bool wincheck()
+    {
+        for (int i =5;i>=3;i--)
+        {
+            for(int j = 0;j<7;j++)
+            {
+                
+                    if (matrix[i, j] == matrix[i - 1, j] && matrix[i, j] == matrix[i - 2, j] && matrix[i, j] == matrix[i - 3, j] && matrix[i,j] != 0)
+                    {
+                    Debug.Log("Yes");
+                        return true;
+                    }
+
+                if (j <= 3)
+                {
+                    if (matrix[i, j] == matrix[i, j + 1] && matrix[i, j] == matrix[i, j + 2] && matrix[i, j] == matrix[i, j + 3] && matrix[i, j] != 0)
+                    {
+                        return true;
+                    }
+
+                    if (matrix[i, j] == matrix[i - 1, j + 1] && matrix[i, j] == matrix[i - 2, j + 2] && matrix[i, j] == matrix[i - 3, j + 3] && matrix[i, j] != 0)
+                    {
+                        return true;
+                    }
+                }
+
+                if(j>=3)
+                {
+                    if (matrix[i, j] == matrix[i - 1, j - 1 ] && matrix[i, j] == matrix[i - 2, j- 2] && matrix[i, j] == matrix[i - 3, j - 3] && matrix[i, j] != 0)
+                    {
+                        return true;
+                    }
+                }
+                    
+            }
+        }
+
+
+        for (int i = 0; i < 6; i++)
+        {
+            for (int j = 0; j < 7; j++)
+            {
+                Debug.Log(i);
+                Debug.Log(j);
+                Debug.Log(matrix[i, j]);
+
+            }
+        }
+        return false;
+    }
 
 }
 
